@@ -21,5 +21,5 @@ include(GNUInstallDirs)
 add_subdirectory(lib)
 add_subdirectory(src)
 
-include(CTest)
-add_subdirectory(tests)
+#include(CTest)
+#add_subdirectory(tests)
