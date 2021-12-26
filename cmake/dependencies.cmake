@@ -108,8 +108,7 @@ if(NOT USE_SYSTEM_SQUASHFUSE)
         COMMAND ${AUTORECONF} -fi || true
         COMMAND ${SED} -i "/PKG_CHECK_MODULES.*/,/,:./d" configure  # https://github.com/vasi/squashfuse/issues/12
         COMMAND ${SED} -i "s/typedef off_t sqfs_off_t/typedef int64_t sqfs_off_t/g" common.h  # off_t's size might differ, see https://stackoverflow.com/a/9073762
-        COMMAND CC=${CC} CXX=${CXX} CFLAGS=${CFLAGS} LDFLAGS=${LDFLAGS} <SOURCE_DIR>/configure --disable-demo --disable-high-level --without-lzo --without-lz4 --prefix=<INSTALL_DIR> --libdir=<INSTALL_DIR>/lib --with-xz=${xz_PREFIX} --with-zstd=${zstd_PREFIX} ${EXTRA_CONFIGURE_FLAGS}
-        COMMAND ${SED} -i "s|XZ_LIBS = -llzma |XZ_LIBS = -Bstatic ${xz_LIBRARIES}/|g" Makefile
+        COMMAND CC=${CC} CXX=${CXX} CFLAGS=${CFLAGS} LDFLAGS=${LDFLAGS} <SOURCE_DIR>/configure --disable-demo --disable-high-level --without-lzo --without-lz4 --prefix=<INSTALL_DIR> --libdir=<INSTALL_DIR>/lib --without-xz --with-zstd=${zstd_PREFIX} ${EXTRA_CONFIGURE_FLAGS}
         COMMAND ${SED} -i "s|ZSTD_LIBS = |ZSTD_LIBS = -Bstatic ${zstd_LIBRARIES}|g" Makefile
         BUILD_COMMAND ${MAKE}
         BUILD_IN_SOURCE ON
