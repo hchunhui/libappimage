@@ -26,16 +26,9 @@
 extern void *libhandle;
 extern int have_libloaded;
 extern const char *load_library_errmsg;
+void load_library(void);
 
-#define LOAD_LIBRARY \
-if (have_libloaded != 1) { \
-  if (!(libhandle = dlopen(LIBNAME, RTLD_LAZY))) { \
-    fprintf(stderr, "dlopen(): error loading " LIBNAME "\n\n%s", load_library_errmsg ); \
-    exit(1); \
-  } else { \
-    have_libloaded = 1; \
-  } \
-}
+#define LOAD_LIBRARY load_library()
 
 #define STRINGIFY(x) #x
 

@@ -6,4 +6,5 @@ patch -p1 < @PROJECT_SOURCE_DIR@/src/patches/squashfuse.patch
 patch -p1 < @PROJECT_SOURCE_DIR@/src/patches/squashfuse_dlopen.patch
 patch -p1 < @PROJECT_SOURCE_DIR@/src/patches/squashfuse_zstd_support.patch
 
+@PROJECT_SOURCE_DIR@/src/patches/buildfuse.sh
 cp -v @PROJECT_SOURCE_DIR@/src/patches/squashfuse_dlopen.c @PROJECT_SOURCE_DIR@/src/patches/squashfuse_dlopen.h .
