@@ -57,10 +57,10 @@ if(NOT USE_SYSTEM_ZSTD)
     message(STATUS "Downloading and building zstd")
 
     ExternalProject_Add(zstd-EXTERNAL
-        URL https://github.com/facebook/zstd/releases/download/v1.5.4/zstd-1.5.4.tar.gz
-        URL_HASH SHA512=2896a6dd6b60cc251720356babcbab6018c874eb2149121b26e28041496fc355a9cb5fd1b39c91558fcfbafb789b3d721264a0f9b5734f893d5f3cdf97016394
+        URL https://github.com/facebook/zstd/releases/download/v1.5.5/zstd-1.5.5.tar.gz
+        URL_HASH SHA256=9c4396cc829cfae319a6e2615202e82aad41372073482fce286fac78646d3ee4
         CONFIGURE_COMMAND echo configure zstd
-        BUILD_COMMAND CC=${CC} CXX=${CXX} CFLAGS=-fPIC CPPFLAGS=${CPPFLAGS} LDFLAGS=${LDFLAGS} ${MAKE} -C<SOURCE_DIR>/lib ZSTD_LIB_MINIFY=1 libzstd.a
+        BUILD_COMMAND env CC=${CC} CXX=${CXX} "CFLAGS=-fPIC -ffunction-sections -fdata-sections" CPPFLAGS=${CPPFLAGS} LDFLAGS=${LDFLAGS} ${MAKE} -C<SOURCE_DIR>/lib ZSTD_LIB_MINIFY=1 libzstd.a
         INSTALL_COMMAND ${MAKE} -C<SOURCE_DIR>/lib PREFIX=<INSTALL_DIR> install-static install-includes
     )
 
