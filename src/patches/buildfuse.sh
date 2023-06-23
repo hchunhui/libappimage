@@ -15,6 +15,6 @@ cp out/usr/local/lib/libfuse.so.2 ../.. &&
 cd ../.. &&
 rm -rf libfuse &&
 strip libfuse.so.2 &&
-python -c 'import sys, zlib; sys.stdout.buffer.write(zlib.compress(sys.stdin.buffer.read(), 9))' < libfuse.so.2 > libfuse.so.2.zlib &&
+python2 -c 'import sys, zlib; sys.stdout.write(zlib.compress(sys.stdin.read(), 9))' < libfuse.so.2 > libfuse.so.2.zlib &&
 xxd -i libfuse.so.2.zlib > libfuse2inc.h &&
 rm -f libfuse.so.2 libfuse.so.2.zlib
