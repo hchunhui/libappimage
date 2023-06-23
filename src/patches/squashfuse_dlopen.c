@@ -22,7 +22,7 @@ const char *load_library_errmsg =
 
 static void *dlopen_builtinfuse(void)
 {
-  unsigned long libfuse_so_2_len = 2000 * 1024;
+  unsigned long libfuse_so_2_len = 512 * 1024;
   unsigned char *libfuse_so_2 = malloc(libfuse_so_2_len);
   int ret = uncompress(libfuse_so_2, &libfuse_so_2_len, libfuse_so_2_zlib, libfuse_so_2_zlib_len);
   if (ret == Z_OK) {
@@ -41,9 +41,8 @@ static void *dlopen_builtinfuse(void)
     char path[256];
     snprintf(path, 256, "/proc/%d/fd/%d", getpid(), fd);
     return dlopen(path, RTLD_LAZY);
-  } else {
-    printf("err %d %d %d %d\n", ret, Z_BUF_ERROR, Z_MEM_ERROR, Z_DATA_ERROR);
   }
+  return NULL;
 }
 
 void load_library(void)
